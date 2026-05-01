@@ -1,30 +1,72 @@
 # 💻 Simulador de Algoritmos de Escalonamento
 
-**Trabalho Acadêmico | Desenvolvido em Dupla** Projeto prático desenvolvido para a disciplina de **Sistemas Operacionais** da Faculdade de Computação da **UFMS** (Universidade Federal de Mato Grosso do Sul).
+**Trabalho Acadêmico | Desenvolvido em Dupla**
+Disciplina de **Sistemas Operacionais** — Faculdade de Computação, **UFMS** (2026).
 
-**Autores:**
-* **Heli Souza**
-* **Junior Rosa**
+**Autores:** Heli Souza · Junior Rosa
 
 ---
 
-## 🚀 Sobre o Projeto
-Este é um simulador desenvolvido em Java para demonstrar e comparar o comportamento de diferentes algoritmos de escalonamento de processos da CPU. A ferramenta processa um arquivo de texto contendo a lista de processos e gera um log detalhado da execução, além de métricas finais de desempenho.
+## 📖 Sobre
 
-## ⚙️ Algoritmos Implementados
+Simulador em **Java** (interface textual) que executa e compara algoritmos clássicos de escalonamento de CPU. Lê os processos de um arquivo `.txt`, gera o log passo a passo da execução e exibe as estatísticas finais.
 
-1. **FCFS (First-Come, First-Served):** Executa na ordem de chegada. Sem preempção.
-2. **SJF (Shortest Job First - Não Preemptivo):** Escolhe o processo com menor burst na fila de prontos. Uma vez iniciado, não é interrompido.
-3. **SJF Preemptivo (SRTF - Shortest Remaining Time First):** A cada instante, o processo com menor tempo restante é executado. Pode antecipar o processo em execução.
-4. **Prioridade (Não Preemptivo):** Menor número = maior prioridade. Em caso de empate, desempata pelo tempo de chegada.
-5. **Round Robin:** Cada processo recebe o tempo do *quantum* definido no arquivo. Ao esgotar o quantum, vai para o fim da fila.
-6. **Modo Completo:** Executa todos os algoritmos de uma vez para fins de comparação.
+## ⚙️ Algoritmos
 
-## 🛠️ Como Compilar e Executar
+1. **FCFS** — First-Come, First-Served
+2. **SJF Não Preemptivo** — Shortest Job First
+3. **SJF Preemptivo (SRTF)** — Shortest Remaining Time First
+4. **Prioridade** — menor número = maior prioridade
+5. **Round Robin** — com *quantum* configurável
+6. **Modo Comparativo** — executa todos sobre a mesma entrada
 
-**Requisito:** Java 8 ou superior instalado.
+## 📄 Formato do Arquivo de Entrada
 
-### Linux / Mac
+```text
+QUANTUM=20
+
+# Nome  Chegada  Burst  Prioridade
+P1      0        200    3
+P2      40       180    1
+P3      100      140    4
+```
+
+- Linhas com `#` são comentários.
+- `QUANTUM=` define o quantum (ms) do Round Robin.
+- Campo `prioridade` é opcional.
+
+## 🚀 Como Executar
+
+**Pré-requisito:** Java 8+
+
+**Linux / macOS:**
 ```bash
 chmod +x compile.sh
 ./compile.sh exemplos/processos.txt
+```
+
+**Windows:**
+```cmd
+mkdir bin
+javac -d bin src\*.java
+java -cp bin Simulador exemplos\processos.txt
+```
+
+## 🗂️ Estrutura
+
+```
+src/        → código-fonte (Simulador, Escalonador, Processo + 5 algoritmos)
+exemplos/   → arquivos de teste (processos.txt, simples.txt)
+compile.sh  → script de build e execução
+```
+
+## 📊 Saída
+
+Para cada algoritmo, o simulador exibe:
+- **Log de execução** (início, preempção, conclusão, CPU ociosa)
+- **Tabela por processo** (chegada, burst, início, fim, espera, retorno)
+- **Médias** de tempo de espera e retorno
+
+---
+
+📚 **UFMS — Sistemas Operacionais 2026** | Projeto de uso acadêmico.
